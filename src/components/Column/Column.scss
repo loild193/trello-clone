@@ -2,7 +2,7 @@
 
 .column {
   flex: 0 0 auto;
-  width: 325px;
+  width: 275px;
   height: calc(100% - 10px);
 
   &:not(:first-child) {
@@ -19,7 +19,6 @@
     padding-left: 15px;
     height: $column-header-height;
     line-height: $column-header-height;
-    font-size: 16px;
     font-weight: 600;
     border-top-left-radius: $column-border-radius;
     border-top-right-radius: $column-border-radius;
@@ -33,7 +32,7 @@
     border-bottom-right-radius: $column-border-radius;
   }
 
-  ul.task-list {
+  ul.card-list {
     list-style: none;
     margin: 0;
     max-height: calc(
