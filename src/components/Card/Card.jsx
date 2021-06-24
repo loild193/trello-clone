@@ -6,11 +6,22 @@ import './Card.scss'
 function Card({ card }) {
 	const { title } = card;
 
+	const handleOnMouseDown = (event) => {
+		event.preventDefault();
+	}
+
 	return (
-		<li className="card-item">
-			{ card.cover && <img className="card-cover" src={card.cover} alt="TTH" />}
+		<div className="card-item">
+			{ card.cover && 
+				<img 
+					className="card-cover" 
+					src={card.cover} 
+					alt="TTH"
+					onMouseDown={handleOnMouseDown} 
+				/>
+			}
 			{ title }
-		</li>
+		</div>
 	)
 }
 
