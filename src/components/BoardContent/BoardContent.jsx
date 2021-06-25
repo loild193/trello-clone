@@ -26,7 +26,7 @@ function BoardContent(props) {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		const newBoard = {...board};
+		let newBoard = {...board};
 		let newColumns = [...columns];
 
 		newColumns = applyDrag(newColumns, dropResult);
@@ -67,7 +67,10 @@ function BoardContent(props) {
 				{
 					columns.map(column => 
 						<Draggable key={column.id}>
-							<Column column={column} onCardDrop={handleOnCardDrop} />
+							<Column 
+								column={column} 
+								onCardDrop={handleOnCardDrop} 
+							/>
 						</Draggable>	
 					)
 				}
