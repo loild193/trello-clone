@@ -8,7 +8,6 @@
 
   > * {
     background-color: $list-bg-color;
-    color: #333;
     padding: 0 8px;
   }
 
@@ -25,10 +24,29 @@
 
   footer {
     padding-left: 10px;
+    padding-bottom: 10px;
     height: $column-footer-height;
     line-height: $column-footer-height;
     border-bottom-left-radius: $column-border-radius;
     border-bottom-right-radius: $column-border-radius;
+
+    color: #5e6c84;
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      padding-left: $gap;
+      height: calc(#{$column-footer-height} - #{$gap});
+      border-radius: $card-border-radius;
+
+      cursor: pointer;
+      transition: background-color 0.15s ease-in-out 0s;
+
+      &:hover {
+        color: $main-text-color;
+        background-color: rgba($color: #091e42, $alpha: 0.08);
+      }
+    }
   }
 
   .card-list {

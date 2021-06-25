@@ -40,4 +40,24 @@
     transition: transform 0.18s ease-in-out;
     transform: rotateZ(0deg);
   }
+
+  .add-new-column {
+    flex: 0 0 auto;
+    width: 275px;
+    height: $column-header-height;
+    margin-left: $gap;
+    padding-left: 15px;
+    line-height: $column-header-height;
+    border-radius: $column-border-radius;
+
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out 0s;
+
+    color: #fff;
+    background-color: rgba($color: #fff, $alpha: 0.24);
+
+    &:hover {
+      background-color: rgba($color: #fff, $alpha: 0.32);
+    }
+  }
 }

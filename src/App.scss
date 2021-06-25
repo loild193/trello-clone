@@ -7,7 +7,7 @@
 }
 
 body {
-  font-size: 14px;
+  font-size: $fontsize-14;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.3em;
@@ -15,6 +15,12 @@ body {
 
 .trello-master {
   height: 100vh;
-  background-color: $bg-color;
   overflow: hidden;
+  background-color: $bg-color;
+  color: $main-text-color;
+
+  .icon {
+    font-size: $fontsize-14;
+    margin-right: 4px;
+  }
 }
