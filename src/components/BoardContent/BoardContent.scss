@@ -25,8 +25,19 @@
 
   // Drag and drop placeholder for column
   .column-drop-preview {
-    background-color: rgba(63, 63, 83, 0.1);
+    background-color: rgba(63, 63, 83, 0.15);
     border: 1px dashed #abc;
     margin: 5px 15px 5px 5px;
+    height: $column-height;
+  }
+  // Style for column drag and drop
+  .column-ghost {
+    transition: transform 0.18s ease;
+    transform: rotateZ(5deg);
+  }
+
+  .column-ghost-drop {
+    transition: transform 0.18s ease-in-out;
+    transform: rotateZ(0deg);
   }
 }

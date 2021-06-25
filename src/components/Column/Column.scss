@@ -1,7 +1,5 @@
 @import "_config.scss";
 
-$column-height: calc(#{$board-content-height} - 2 * #{$gap});
-
 .column {
   flex: 0 0 auto;
   width: 275px;

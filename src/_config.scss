@@ -4,11 +4,15 @@ $list-bg-color: #ebecf0;
 $card-bg-color: #fff;
 
 $gap: 10px;
+
 $appbar-height: 7vh;
 $boardbar-height: 7vh;
 $board-content-height: 84vh;
+
+$column-height: calc(#{$board-content-height} - 2 * #{$gap});
 $column-header-height: 46px;
 $column-footer-height: 46px;
+
 $column-border-radius: 5px;
 $card-border-radius: 4px;
 

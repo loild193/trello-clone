@@ -31,10 +31,10 @@ export const initData = {
 					id: 'column-2',
 					boardId: 'board-1',
 					title: 'Love column-2',
-					cardOrder: ['card-8', 'card-9'],
+					cardOrder: ['card-13', 'card-14'],
 					cards: [
-						{ id: 'card-8', boardId: 'board-1', columnId: 'column-1', title: 'Title card 8', cover: null },
-						{ id: 'card-9', boardId: 'board-1', columnId: 'column-1', title: 'Title card 9', cover: null },
+						{ id: 'card-13', boardId: 'board-1', columnId: 'column-1', title: 'Title card 13', cover: null },
+						{ id: 'card-14', boardId: 'board-1', columnId: 'column-1', title: 'Title card 14', cover: null },
 					],
 				},
 				{
