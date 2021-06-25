@@ -5,6 +5,7 @@ import Column from 'components/Column/Column'
 import { initData } from 'actions/inititalData';
 import { isEmpty } from 'lodash';
 import { mapOrder } from 'utilities/sorts';
+import { applyDrag } from 'utilities/dnd';
 import { Container, Draggable } from 'react-smooth-dnd';
 
 function BoardContent(props) {
@@ -15,8 +16,8 @@ function BoardContent(props) {
 		const boardFromDB = initData.boards.find(board => board.id === 'board-1');
 
 		if (boardFromDB) {
-			setBoard(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id'));
-			setColumns(boardFromDB.columns);
+			setBoard(boardFromDB);
+			setColumns(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id'));
 		}
 	}, []);
 
@@ -25,7 +26,27 @@ function BoardContent(props) {
 	}
 
 	const onColumnDrop = (dropResult) => {
-		console.log(dropResult);
+		const newBoard = {...board};
+		let newColumns = [...columns];
+
+		newColumns = applyDrag(newColumns, dropResult);
+		newBoard.columnOrder = newColumns.map(column => column.id);
+		newBoard.columns = newColumns;
+
+		setColumns(prev => newColumns);
+		setBoard(prev => newBoard);
+	}
+
+	const handleOnCardDrop = (dropResult, columnId) => {
+		if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+			let newColumns = [...columns];
+			let currentColumn = newColumns.find(column => column.id === columnId);
+
+			currentColumn.cards = applyDrag(currentColumn.cards, dropResult);
+			currentColumn.cardOrder = currentColumn.cards.map(card => card.id);
+
+			setColumns(prev => newColumns);
+		}
 	}
 
 	return (
@@ -35,6 +56,8 @@ function BoardContent(props) {
 				onDrop={onColumnDrop}
 				getChildPayload={index => columns[index]}
 				dragHandleSelector=".column-header"
+				dragClass="column-ghost"
+				dropClass="column-ghost-drop"
 				dropPlaceholder={{
 					animationDuration: 150,
 					showOnTop: true,
@@ -44,7 +67,7 @@ function BoardContent(props) {
 				{
 					columns.map(column => 
 						<Draggable key={column.id}>
-							<Column column={column} />
+							<Column column={column} onCardDrop={handleOnCardDrop} />
 						</Draggable>	
 					)
 				}
