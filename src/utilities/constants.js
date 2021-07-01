@@ -1,0 +1,2 @@
+export const CONFIRM_MODAL = "CONFIRM_MODAL";
+export const CLOSE_MODAL = "CLOSE_MODAL";

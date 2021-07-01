@@ -45,4 +45,16 @@ body {
     border: none;
     box-shadow: none;
   }
+
+  .content-editable-input {
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    background-color: inherit;
+
+    &:focus {
+      box-shadow: inset 0 0 0 1.5px #0079bf;
+      background-color: $input-bg-color;
+    }
+  }
 }

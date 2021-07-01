@@ -12,7 +12,8 @@
   }
 
   header.column-header {
-    padding-left: 15px;
+    display: flex;
+    padding-left: $gap;
     height: $column-header-height;
     line-height: $column-header-height;
     font-weight: 600;
@@ -20,6 +21,43 @@
     border-top-right-radius: $column-border-radius;
 
     cursor: pointer;
+
+    .column-title {
+      flex: 90%;
+      margin-top: 5px;
+    }
+
+    .column-dropdown-actions {
+      & > .dropdown > button {
+        background-color: #ebecf0;
+        border: none;
+        color: $main-text-color;
+        opacity: 0.6;
+
+        transition: opacity 0.2s ease-in-out 0s;
+
+        &:focus {
+          box-shadow: none;
+          opacity: 1;
+        }
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      .dropdown-menu {
+        .dropdown-item {
+          font-size: $fontsize-14;
+          line-height: 32px;
+          padding: 0.25rem 1rem;
+
+          &:active {
+            color: $main-text-color;
+            background-color: $list-bg-color;
+          }
+        }
+      }
+    }
   }
 
   footer {
