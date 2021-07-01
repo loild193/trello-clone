@@ -60,10 +60,10 @@
         transition: background-color 0.15s ease-in-out 0s;
 
         color: #fff;
-        background-color: rgba($color: #fff, $alpha: 0.24);
+        background-color: rgba($color: $input-bg-color, $alpha: 0.24);
 
         &:hover {
-          background-color: rgba($color: #fff, $alpha: 0.32);
+          background-color: rgba($color: $input-bg-color, $alpha: 0.32);
         }
 
         & > div > span {
