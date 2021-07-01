@@ -88,11 +88,9 @@ function BoardContent(props) {
 				}
 			});
 			setNewColumnTitle('');
-			addNewColumnInputRef.current.focus();
 		}
-		else {
-			addNewColumnInputRef.current.focus();
-		}
+
+		addNewColumnInputRef.current.focus();
 	}
 
 	const handleOnChangeAddColumnTitleInput = (e) => {
@@ -144,7 +142,7 @@ function BoardContent(props) {
 										className="input-enter-new-column"
 										value={newColumnTitle}
 										onChange={handleOnChangeAddColumnTitleInput}
-										onKetDown={e => (e.key === 'Enter') && handleAddNewColumn()}
+										onKeyDown={e => (e.key === 'Enter') && handleAddNewColumn()}
 									/>
 									<Button 
 										variant="success"
