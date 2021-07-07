@@ -168,7 +168,7 @@ function BoardContent(props) {
 										size="sm"
 										type="text"
 										placeholder="Enter column title"
-										className="input-enter-new-column"
+										className="input-enter-new"
 										value={newColumnTitle}
 										onChange={handleOnChangeAddColumnTitleInput}
 										onKeyDown={e => (e.key === 'Enter') && handleAddNewColumn()}
@@ -176,7 +176,7 @@ function BoardContent(props) {
 									<Button 
 										variant="success"
 										size="sm"
-										className="button-enter-new-column"
+										className="button-enter-new"
 										onClick={handleAddNewColumn}
 									>
 										Add column

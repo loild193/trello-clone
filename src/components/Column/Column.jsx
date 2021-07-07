@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-
-import './Column.scss'
-import Card from 'components/Card/Card'
-import { mapOrder } from 'utilities/sorts';
-import { Container, Draggable } from 'react-smooth-dnd';
+import Card from 'components/Card/Card';
+import ConfirmModal from 'components/common/ConfirmModal';
+import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
-import ConfirmModal from 'components/common/ConfirmModal';
+import { Container, Draggable } from 'react-smooth-dnd';
 import { CONFIRM_MODAL } from 'utilities/constants';
-import { useEffect } from 'react';
 import { handlePressEnter, handleSelectAllText } from 'utilities/editableContent';
+import { mapOrder } from 'utilities/sorts';
+import './Column.scss';
 
 function Column({ column, onCardDrop, onUpdateColumns }) {
 	const cards = mapOrder(column.cards, column.cardOrder, 'id');
@@ -18,9 +17,21 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 	const [newTitleColumn, setNewTitleColumn] = useState('');
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+	const [newCardTitle, setNewCardTitle] = useState('');
+	const [addNewCardButtonVisible, setAddNewCardButtonVisible] = useState(true);
+
+	const addNewCardInputRef = useRef(null);
+
 	useEffect(() => {
 		setNewTitleColumn(column.title);
 	}, [column.title]);
+
+	useEffect(() => {
+		if (addNewCardInputRef && addNewCardInputRef.current) {
+			addNewCardInputRef.current.focus();
+			addNewCardInputRef.current.select();
+		}
+	}, [addNewCardButtonVisible]);
 
 	const toogleShowConfirmModal = () => setShowConfirmModal(!showConfirmModal);
 
@@ -36,9 +47,7 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 		toogleShowConfirmModal();
 	}
 
-	const handleNewTitleChange = e => {
-		setNewTitleColumn(e.target.value);
-	}
+	const handleNewTitleChange = e => setNewTitleColumn(e.target.value);
 
 	const handleNewTitleBlur = e => {
 		e.target.blur();
@@ -49,8 +58,43 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 		onUpdateColumns(newColumn);
 	}
 
-	const handleOnMouseDown = e => {
-		e.preventDefault();
+	const handlePreventDefault = e => e.preventDefault();
+
+	const handleAddNewCardVisible = () =>	setAddNewCardButtonVisible(!addNewCardButtonVisible);
+
+	const handleOnChangeAddCardTitleInput = e => setNewCardTitle(e.target.value);
+
+	const handleAddNewCard = (e) => {
+		if (!newCardTitle) {
+			handlePreventDefault(e);
+			addNewCardInputRef.current.focus();
+			return;
+		}
+
+		const newCard = {
+			id: Math.random().toString(36).substring(2, 5), 
+			boardId: column.boardId,
+			columnId: column.id, 
+			title: newCardTitle.trim(),
+			cover: null,
+		}
+		const newColumn = {
+			...column,
+			cardOrder: [
+				...column.cardOrder,
+				newCard.id,
+			],
+			cards: [
+				...column.cards,
+				newCard,
+			],
+		}
+
+		onUpdateColumns(newColumn);
+		setNewCardTitle('');
+		setAddNewCardButtonVisible(!addNewCardButtonVisible);
+
+		addNewCardInputRef.current.focus();
 	}
 
 	return (
@@ -66,7 +110,7 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 						onClick={handleSelectAllText}
 						onChange={handleNewTitleChange}
 						onBlur={handleNewTitleBlur}
-						onMouseDown={handleOnMouseDown}
+						onMouseDown={handlePreventDefault}
 						onKeyDown={handlePressEnter}
 						spellCheck='false'
 					/>
@@ -76,7 +120,7 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 						<Dropdown.Toggle size="sm" id="dropdown-basic" className="btn-dropdown" />
 
 						<Dropdown.Menu>
-							<Dropdown.Item>Add card</Dropdown.Item>
+							<Dropdown.Item onClick={handleAddNewCardVisible}>Add card</Dropdown.Item>
 							<Dropdown.Item onClick={toogleShowConfirmModal}>Delete column</Dropdown.Item>
 							<Dropdown.Item>Something else</Dropdown.Item>
 						</Dropdown.Menu>
@@ -105,12 +149,42 @@ function Column({ column, onCardDrop, onUpdateColumns }) {
 						)
 					}
 				</Container>
+				{
+					!addNewCardButtonVisible
+						&&	<Form.Control
+									ref={addNewCardInputRef} 
+									size="sm"
+									as="textarea"
+									rows="3"
+									placeholder="Enter new card title"
+									className="input-enter-new"
+									value={newCardTitle}
+									onChange={handleOnChangeAddCardTitleInput}
+									onKeyDown={e => (e.key === 'Enter') && handleAddNewCard(e)}
+								/>
+				}
 			</div>
 			<footer>
-				<div className="footer-actions">
-					<span><i className="fa fa-plus icon" /></span>
-					<span>Add another card</span>
-				</div>
+				{
+					addNewCardButtonVisible 
+						? <div className="footer-actions" onClick={handleAddNewCardVisible}>
+								<span><i className="fa fa-plus icon" /></span>
+								<span>Add another card</span>
+							</div>
+						: <div className="add-new-card-area">
+								<Button 
+									variant="success"
+									size="sm"
+									className="button-enter-new"
+									onClick={handleAddNewCard}
+								>
+									Add column
+								</Button>
+								<span className="remove-icon" onClick={handleAddNewCardVisible}>
+									<i className="fa fa-remove icon" />
+								</span>
+							</div>
+				}
 			</footer>
 			<ConfirmModal
 				show={showConfirmModal}

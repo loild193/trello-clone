@@ -1,5 +1,4 @@
 import React from 'react'
-
 import './AppBar.scss'
 
 function AppBar(props) {

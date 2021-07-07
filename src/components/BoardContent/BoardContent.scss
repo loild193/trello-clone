@@ -60,10 +60,16 @@
         transition: background-color 0.15s ease-in-out 0s;
 
         color: #fff;
-        background-color: rgba($color: $input-bg-color, $alpha: 0.24);
+        background-color: rgba(
+          $color: $input-bg-color,
+          $alpha: 0.24
+        );
 
         &:hover {
-          background-color: rgba($color: $input-bg-color, $alpha: 0.32);
+          background-color: rgba(
+            $color: $input-bg-color,
+            $alpha: 0.32
+          );
         }
 
         & > div > span {
@@ -79,30 +85,6 @@
         background-color: $list-bg-color;
         line-height: $column-header-height;
         border-radius: $column-border-radius;
-
-        .input-enter-new-column {
-          font-size: $fontsize-14;
-          box-shadow: inset 0 0 0 1.5px #0079bf;
-        }
-
-        .button-enter-new-column {
-          font-size: $fontsize-14;
-          margin-right: $gap;
-        }
-
-        .remove-icon {
-          cursor: pointer;
-
-          & > i {
-            font-size: 1rem;
-            opacity: 0.9;
-            transition: opacity 0.2s ease-in-out 0s;
-
-            &:hover {
-              opacity: 1;
-            }
-          }
-        }
       }
     }
   }

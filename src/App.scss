@@ -8,8 +8,9 @@
 
 body {
   font-size: $fontsize-14 !important;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
+    sans-serif;
   line-height: 1.3em;
 }
 
@@ -38,6 +39,7 @@ body {
   [contenteditable].form-control:focus {
     outline: none;
     border: none;
+    box-shadow: inset 0 0 0 1.5px #0079bf;
   }
   .btn:focus,
   .btn:active {
@@ -55,6 +57,30 @@ body {
     &:focus {
       box-shadow: inset 0 0 0 1.5px #0079bf;
       background-color: $input-bg-color;
+    }
+  }
+
+  // ADD NEW ELEMENT IN FOOTER
+  .input-enter-new {
+    font-size: $fontsize-14;
+  }
+
+  .button-enter-new {
+    font-size: $fontsize-14;
+    margin-right: $gap;
+  }
+
+  span.remove-icon {
+    cursor: pointer;
+
+    & > i {
+      font-size: 1rem;
+      opacity: 0.9;
+      transition: opacity 0.2s ease-in-out 0s;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

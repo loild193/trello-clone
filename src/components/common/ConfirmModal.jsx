@@ -1,7 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
 import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { CLOSE_MODAL, CONFIRM_MODAL } from 'utilities/constants';
