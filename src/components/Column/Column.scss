@@ -82,7 +82,10 @@
 
       &:hover {
         color: $main-text-color;
-        background-color: rgba($color: #091e42, $alpha: 0.08);
+        background-color: rgba(
+          $color: #091e42,
+          $alpha: 0.08
+        );
       }
     }
   }
@@ -109,6 +112,11 @@
       background-color: #dadbe2;
       border-radius: $column-border-radius;
     }
+  }
+
+  .input-enter-new {
+    min-height: 54px;
+    max-height: 162px;
   }
 
   // Drag and drop placeholder for task

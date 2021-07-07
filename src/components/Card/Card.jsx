@@ -1,7 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import './Card.scss'
+import PropTypes from 'prop-types';
+import React from 'react';
+import './Card.scss';
 
 function Card({ card }) {
 	const { title } = card;
